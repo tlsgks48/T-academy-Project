@@ -1,61 +1,69 @@
 package com.t_academy_project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.t_academy_project.adapter.CustomAdapter;
+import com.t_academy_project.item.Dictionary;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView selected_item_textview;
+    private ArrayList<Dictionary> mArrayList;
+    private CustomAdapter mAdapter;
+    private int count = -1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView listview = (ListView)findViewById(R.id.listview);
-        selected_item_textview = (TextView)findViewById(R.id.selected_item_textview);
 
 
-        //데이터를 저장하게 되는 리스트
-        List<String> list = new ArrayList<>();
-
-        //리스트뷰와 리스트를 연결하기 위해 사용되는 어댑터
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, list);
-
-        //리스트뷰의 어댑터를 지정해준다.
-        listview.setAdapter(adapter);
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main_list);
+        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
 
-        //리스트뷰의 아이템을 클릭시 해당 아이템의 문자열을 가져오기 위한 처리
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mArrayList = new ArrayList<>();
 
+        mAdapter = new CustomAdapter( mArrayList);
+        mRecyclerView.setAdapter(mAdapter);
+
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
+                mLinearLayoutManager.getOrientation());
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
+
+
+
+        Button buttonInsert = (Button)findViewById(R.id.button_main_insert);
+        buttonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView,
-                                    View view, int position, long id) {
+            public void onClick(View v) {
 
-                //클릭한 아이템의 문자열을 가져옴
-                String selected_item = (String)adapterView.getItemAtPosition(position);
+                count++;
 
-                //텍스트뷰에 출력
-                selected_item_textview.setText(selected_item);
-            }
+                Dictionary data = new Dictionary(count+"","Apple" + count, "사과" + count);
+
+                //mArrayList.add(0, dict); //RecyclerView의 첫 줄에 삽입
+                mArrayList.add(data); // RecyclerView의 마지막 줄에 삽입
+
+                mAdapter.notifyDataSetChanged();             }
         });
 
-
-        //리스트뷰에 보여질 아이템을 추가
-        list.add("사과");
-        list.add("배");
-        list.add("귤");
-        list.add("바나나");
     }
 }
