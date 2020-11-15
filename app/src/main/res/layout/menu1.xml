@@ -23,5 +23,24 @@
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/ic_launcher"  />
 
+    <TextView
+        android:id="@+id/mainvalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="메인스레드 값"/>
+    <TextView
+        android:id="@+id/backvalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="작업스레드 값"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    <Button
+        android:id="@+id/increase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="mOnClick"
+        android:text="메인스레드 값 증가"/>
+
 
 </LinearLayout>
