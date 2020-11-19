@@ -31,13 +31,23 @@ public class F_menu2 extends Fragment {
         ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.f_menu2,container,false);
         // rootview가 플래그먼트 화면으로 보이게 된다. 부분화면을 보여주고자하는 틀로 생각하면 된다.
 
-        Button button = (Button)rootview.findViewById(R.id.Dialog_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button Dialog_button = rootview.findViewById(R.id.Dialog_button);
+        Dialog_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 show();
             }
         });
+
+        Button Dialog_button2 = rootview.findViewById(R.id.Dialog_button);
+        Dialog_button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                show2();
+            }
+        });
+
+
 
         return rootview;
     }
