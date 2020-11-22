@@ -28,7 +28,7 @@ public class F_menu2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.f_menu2,container,false);
+        View rootview = inflater.inflate(R.layout.f_menu2,container,false);
         // rootview가 플래그먼트 화면으로 보이게 된다. 부분화면을 보여주고자하는 틀로 생각하면 된다.
 
         Button Dialog_button = rootview.findViewById(R.id.Dialog_button);
